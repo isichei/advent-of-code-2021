@@ -4,11 +4,7 @@ use std::path::Path;
 
 fn main() {
     let mut values: Vec<i64> = Vec::new();
-    // let mut buffer: [i64; 2] = [-1, -1];
-
-    // File hosts must exist in current path before this produces output
     if let Ok(lines) = read_lines("data/input.txt") {
-        // Consumes the iterator, returns an (Optional) String
         for line in lines {
             let v = line.unwrap().parse::<i64>().unwrap();
             values.push(v);
