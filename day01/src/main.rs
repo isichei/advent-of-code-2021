@@ -4,6 +4,7 @@ use std::path::Path;
 
 fn main() {
     let mut values: Vec<i64> = Vec::new();
+
     if let Ok(lines) = read_lines("data/input.txt") {
         for line in lines {
             let v = line.unwrap().parse::<i64>().unwrap();
@@ -11,13 +12,18 @@ fn main() {
         }
     }
 
-    let mut prev: i64 = 0;
+    let mut current: i64;
     let mut increase_count: u64 = 0;
-    for (i, val) in values.into_iter().enumerate() {
-        if i != 0 && val > prev {
+
+    let mut win_iter = values.windows(3);
+    let mut prev = win_iter.next().unwrap().iter().sum();
+
+    for win in win_iter {
+        current = win.iter().sum();
+        if current > prev {
             increase_count += 1;
         }
-        prev = val;
+        prev = current;
     }
 
     println!("Total increased: {}", increase_count)
