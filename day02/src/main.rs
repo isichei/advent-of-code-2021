@@ -40,13 +40,17 @@ impl Instruction {
 fn main() {
     let mut h: u32 = 0;
     let mut depth: u32 = 0;
+    let mut aim: u32 = 0;
     if let Ok(lines) = read_lines("data/input.txt") {
         for line in lines {
             let i = Instruction::new(line.unwrap());
             match i.direction {
-                Direction::Forward => h += i.amount,
-                Direction::Down => depth += i.amount,
-                Direction::Up => depth -= i.amount,
+                Direction::Forward => {
+                    h += i.amount;
+                    depth += aim*i.amount;
+                },
+                Direction::Down => aim += i.amount,
+                Direction::Up => aim -= i.amount,
             }
         }
     }
